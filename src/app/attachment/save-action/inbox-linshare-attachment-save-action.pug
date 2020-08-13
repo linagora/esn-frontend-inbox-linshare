@@ -1,0 +1,16 @@
+.action(ng-switch="$ctrl.status")
+  a(ng-switch-when="checking", title='{{ "Checking availability of this attachment on LinShare" | translate }}')
+    i.mdi.mdi-cloud-outline
+    span.label {{ 'Checking...' | translate }}
+
+  a(ng-switch-when="saving", title='{{ "This attachment is being saved to LinShare" | translate }}')
+    i.mdi.mdi-cloud-sync
+    span.label {{ 'Saving...' | translate }}
+
+  a(ng-switch-when="saved", target="_blank", ng-href="{{::$ctrl.attachmentUrl}}", title='{{ "Click to open this attachment in LinShare" | translate }}')
+    i.mdi.mdi-cloud-check
+    span.label {{ 'Saved' | translate }}
+
+  a(ng-switch-default, ng-click="$event.stopPropagation(); $ctrl.onSaveBtnClick()", href="", title='{{ "Save this attachment to LinShare" | translate }}', target="_blank")
+    i.mdi.mdi-cloud-upload
+    span.label {{ 'Save' | translate }}

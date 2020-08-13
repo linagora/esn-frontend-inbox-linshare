@@ -1,0 +1,23 @@
+.inbox-linshare-files-inserter-modal {
+  .modal-dialog .modal-content .modal-body {
+    linshare-myspace-file-browser {
+      .listview {
+        height: 100%;
+      }
+
+      .lv-body {
+        height: ~"calc(100% - 70px)";
+
+        .browser-body {
+          overflow-y: auto;
+          height: ~"calc(100% - 81px)";
+
+          @media (min-width: @screen-md-min) {
+            overflow-y: scroll;
+            height: 30vh;
+          }
+        }
+      }
+    }
+  }
+}
