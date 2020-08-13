@@ -8,6 +8,7 @@ angular.module('linagora.esn.unifiedinbox.linshare', [
   'esn.i18n',
   'esn.lodash-wrapper',
   'esn.configuration',
+  'esn.notification',
   'linagora.esn.unifiedinbox',
   'linagora.esn.linshare'
 ]);
@@ -19,6 +20,8 @@ require('esn-frontend-common-libs/src/frontend/js/modules/file');
 require('esn-frontend-common-libs/src/frontend/js/modules/http');
 require('esn-frontend-common-libs/src/frontend/js/modules/i18n/i18n.module');
 require('esn-frontend-common-libs/src/frontend/js/modules/lodash-wrapper');
+require('esn-frontend-common-libs/src/frontend/js/modules/config/config.module.js');
+require('esn-frontend-common-libs/src/frontend/js/modules/notification');
 
 require('./app.constants');
 require('./app.run');
