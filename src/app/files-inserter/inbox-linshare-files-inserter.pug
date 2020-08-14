@@ -1,0 +1,15 @@
+.modal.inbox-linshare-files-inserter-modal.full-screen
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type="button", data-dismiss="modal", aria-label='{{ "Close" | translate }}', ng-click="$hide()")
+          span(aria-hidden="true") &times;
+        h4.modal-title {{ 'Insert files from LinShare' | translate }}
+      .modal-body.overflow-none.p-0
+        linshare-myspace-file-browser(selected-nodes='$ctrl.selectedNodes')
+      .modal-footer.flex
+        .flex-vertical-centered.flex-end
+          button.btn.btn-link(type="button", ng-click="$hide()")
+            | {{ 'Cancel' | translate }}
+          button.btn.btn-primary(ng-click="$ctrl.insert(); $hide();", ng-disabled="!($ctrl.selectedNodes.length > 0)")
+            | {{ 'Insert' | translate }}

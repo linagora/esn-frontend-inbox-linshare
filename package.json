@@ -1,0 +1,17 @@
+{
+  "name": "esn-frontend-inbox-linshare",
+  "version": "0.1.0",
+  "description": "LinShare plugin for OpenPaaS Unified Inbox module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "AGPLv3",
+  "dependencies": {
+    "esn-frontend-common-libs": "github:openpaas-suite/esn-frontend-common-libs#main",
+    "esn-frontend-inbox": "github:openpaas-suite/esn-frontend-inbox#main",
+    "esn-frontend-linshare": "github:openpaas-suite/esn-frontend-linshare#main",
+    "lodash": "2.4.1"
+  }
+}
