@@ -1,15 +1,13 @@
 angular
   .module('linagora.esn.unifiedinbox.linshare')
-  .factory('linshareConfigurationService', linshareConfigurationService);
+  .factory('linshareConfigurationService', function(esnConfig) {
+    return {
+      isConfigured
+    };
 
-function linshareConfigurationService(esnConfig) {
-  return {
-    isConfigured: isConfigured
-  };
-
-  function isConfigured() {
-    return esnConfig('linagora.esn.linshare.instanceURL').then(function(config) {
-      return config && config.length > 0;
-    });
-  }
-}
+    function isConfigured() {
+      return esnConfig('linagora.esn.linshare.instanceURL').then(function(config) {
+        return config && config.length > 0;
+      });
+    }
+  });

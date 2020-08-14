@@ -1,9 +1,11 @@
 'use strict';
 
+const _ = require('lodash');
+require('../app.constants');
+
 angular.module('linagora.esn.unifiedinbox.linshare')
   .factory('inboxLinsharePresendingHook', function(
     $q,
-    _,
     esnI18nService,
     linshareApiClient,
     emailSendingService,

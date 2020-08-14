@@ -1,13 +1,15 @@
 'use strict';
 
+require('./inbox-linshare-restangular.service');
+
 angular.module('linagora.esn.unifiedinbox.linshare')
   .factory('inboxLinshareApiClient', function(inboxLinshareRestangular) {
     const API_PATH = 'attachments';
 
     return {
-      createAttachment: createAttachment,
-      getAttachments: getAttachments,
-      updateAttachment: updateAttachment
+      createAttachment,
+      getAttachments,
+      updateAttachment
     };
 
     function createAttachment(data) {
