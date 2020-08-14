@@ -9,9 +9,9 @@ angular.module('linagora.esn.unifiedinbox.linshare')
     DEFAULT_FILE_TYPE
   ) {
     return {
-      documentToAttachment: documentToAttachment,
-      getLinShareAttachmentUUIDsFromEmailHeader: getLinShareAttachmentUUIDsFromEmailHeader,
-      setLinShareAttachmentUUIDsToEmailHeader: setLinShareAttachmentUUIDsToEmailHeader
+      documentToAttachment,
+      getLinShareAttachmentUUIDsFromEmailHeader,
+      setLinShareAttachmentUUIDsToEmailHeader
     };
 
     function documentToAttachment(document) {
