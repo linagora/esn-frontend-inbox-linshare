@@ -1,12 +1,17 @@
+'use strict';
+
+const _ = require('lodash');
+require('../helper/inbox-linshare-helper.service');
+require('../app.constants');
+
 angular.module('linagora.esn.unifiedinbox.linshare')
   .factory('inboxLinsharePrecomposingHook', function(
-    _,
     linshareApiClient,
     inboxLinshareHelper,
     INBOX_LINSHARE_ATTACHMENT_TYPE
   ) {
     return function(email) {
-      let linShareAttachmentUUIDs = inboxLinshareHelper.getLinShareAttachmentUUIDsFromEmailHeader(email);
+      const linShareAttachmentUUIDs = inboxLinshareHelper.getLinShareAttachmentUUIDsFromEmailHeader(email);
 
       if (!linShareAttachmentUUIDs.length) {
         return;

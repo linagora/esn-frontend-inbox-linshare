@@ -1,5 +1,8 @@
 'use strict';
 
+require('./inbox-linshare-attachment-save-action.service');
+require('../../app.constants');
+
 angular.module('linagora.esn.unifiedinbox.linshare')
   .controller('inboxLinshareAttachmentSaveActionController', inboxLinshareAttachmentSaveActionController);
 
@@ -11,7 +14,7 @@ function inboxLinshareAttachmentSaveActionController(
   inboxLinshareAttachmentSaveActionService,
   INBOX_LINSHARE_ATTACHMENT_MAPPING_STATUS
 ) {
-  let self = this;
+  const self = this;
 
   self.$onInit = $onInit;
   self.onSaveBtnClick = onSaveBtnClick;

@@ -1,16 +1,19 @@
 'use strict';
 
+const _ = require('lodash');
+require('../helper/inbox-linshare-helper.service');
+require('../app.constants');
+
 angular.module('linagora.esn.unifiedinbox.linshare')
   .controller('inboxLinshareComposerSelectAttachmentController', inboxLinshareComposerSelectAttachmentController);
 
 function inboxLinshareComposerSelectAttachmentController(
   $modal,
   $scope,
-  _,
   inboxLinshareHelper,
   INBOX_LINSHARE_ATTACHMENT_TYPE
 ) {
-  let self = this;
+  const self = this;
 
   self.$onInit = $onInit;
 

@@ -1,8 +1,12 @@
 'use strict';
 
+const _ = require('lodash');
+require('../../errors/inbox-linshare-errors.service');
+require('../../helper/inbox-linshare-helper.service');
+require('../../app.constants');
+
 angular.module('linagora.esn.unifiedinbox.linshare')
   .factory('inboxLinshareAttachmentProvider', function(
-    _,
     $q,
     fileUploadService,
     inboxLinshareErrors,
