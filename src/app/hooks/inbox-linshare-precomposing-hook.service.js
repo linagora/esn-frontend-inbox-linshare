@@ -1,39 +1,37 @@
 angular.module('linagora.esn.unifiedinbox.linshare')
-  .factory('inboxLinsharePrecomposingHook', inboxLinsharePrecomposingHook);
+  .factory('inboxLinsharePrecomposingHook', function(
+    _,
+    linshareApiClient,
+    inboxLinshareHelper,
+    INBOX_LINSHARE_ATTACHMENT_TYPE
+  ) {
+    return function(email) {
+      let linShareAttachmentUUIDs = inboxLinshareHelper.getLinShareAttachmentUUIDsFromEmailHeader(email);
 
-function inboxLinsharePrecomposingHook(
-  _,
-  linshareApiClient,
-  inboxLinshareHelper,
-  INBOX_LINSHARE_ATTACHMENT_TYPE
-) {
-  return function(email) {
-    let linShareAttachmentUUIDs = inboxLinshareHelper.getLinShareAttachmentUUIDsFromEmailHeader(email);
+      if (!linShareAttachmentUUIDs.length) {
+        return;
+      }
 
-    if (!linShareAttachmentUUIDs.length) {
-      return;
-    }
+      linShareAttachmentUUIDs.forEach(function(uuid) {
+        let documentToAttach = {
+          uuid: uuid,
+          attachmentType: INBOX_LINSHARE_ATTACHMENT_TYPE,
+          status: 'loading'
+        };
 
-    linShareAttachmentUUIDs.forEach(function(uuid) {
-      let documentToAttach = {
-        uuid: uuid,
-        attachmentType: INBOX_LINSHARE_ATTACHMENT_TYPE,
-        status: 'loading'
-      };
+        _fetchLinShareDocument(documentToAttach);
 
-      _fetchLinShareDocument(documentToAttach);
-
-      email.attachments.push(documentToAttach);
-    });
-  };
-
-  function _fetchLinShareDocument(document) {
-    linshareApiClient.getDocument(document.uuid)
-      .then(function(linShareDocument) {
-        _.assign(document, inboxLinshareHelper.documentToAttachment(linShareDocument));
-      })
-      .catch(function() {
-        document.status = 'load-error';
+        email.attachments.push(documentToAttach);
       });
-  }
-}
+    };
+
+    function _fetchLinShareDocument(document) {
+      linshareApiClient.getDocument(document.uuid)
+        .then(function(linShareDocument) {
+          _.assign(document, inboxLinshareHelper.documentToAttachment(linShareDocument));
+        })
+        .catch(function() {
+          document.status = 'load-error';
+        });
+    }
+  });

@@ -1,76 +1,74 @@
 'use strict';
 
 angular.module('linagora.esn.unifiedinbox.linshare')
-  .factory('inboxLinshareAttachmentProvider', inboxLinshareAttachmentProvider);
-
-function inboxLinshareAttachmentProvider(
-  _,
-  $q,
-  fileUploadService,
-  inboxLinshareErrors,
-  inboxLinshareHelper,
-  linshareFileUpload,
-  notificationFactory,
-  DEFAULT_FILE_TYPE,
-  INBOX_LINSHARE_ATTACHMENT_TYPE
-) {
-  return {
-    name: 'Linshare',
-    type: INBOX_LINSHARE_ATTACHMENT_TYPE,
-    icon: 'linshare-icon linshare-desktop-icon',
-    upload: upload,
-    fileToAttachment: fileToAttachment,
-    removeAttachment: removeAttachment,
-    handleErrorOnUploading: handleErrorOnUploading
-  };
-
-  function upload(attachment) {
-    let deferred = $q.defer();
-    let uploader = fileUploadService.get(linshareFileUpload);
-    let uploadTask = uploader.addFile(attachment.getFile());
-
-    uploadTask.defer.promise.then(function(task) {
-      attachment.uuid = task.response.uuid;
-      deferred.resolve();
-    }, deferred.reject, function(uploadTask) {
-      deferred.notify(uploadTask.progress);
-    });
-
-    uploader.start();
-
+  .factory('inboxLinshareAttachmentProvider', function(
+    _,
+    $q,
+    fileUploadService,
+    inboxLinshareErrors,
+    inboxLinshareHelper,
+    linshareFileUpload,
+    notificationFactory,
+    DEFAULT_FILE_TYPE,
+    INBOX_LINSHARE_ATTACHMENT_TYPE
+  ) {
     return {
-      cancel: uploadTask.cancel,
-      promise: deferred.promise
+      name: 'Linshare',
+      type: INBOX_LINSHARE_ATTACHMENT_TYPE,
+      icon: 'linshare-icon linshare-desktop-icon',
+      upload,
+      fileToAttachment,
+      removeAttachment,
+      handleErrorOnUploading
     };
-  }
 
-  function fileToAttachment(file) {
-    return {
-      attachmentType: INBOX_LINSHARE_ATTACHMENT_TYPE,
-      name: file.name,
-      size: file.size,
-      type: file.type || DEFAULT_FILE_TYPE,
-      isInline: false,
-      getFile: function() {
-        return file;
-      }
-    };
-  }
+    function upload(attachment) {
+      let deferred = $q.defer();
+      let uploader = fileUploadService.get(linshareFileUpload);
+      let uploadTask = uploader.addFile(attachment.getFile());
 
-  function removeAttachment(email, attachment) {
-    let linShareAttachmentUUIDs = inboxLinshareHelper.getLinShareAttachmentUUIDsFromEmailHeader(email);
-    let removedAttachmentIndex = linShareAttachmentUUIDs.indexOf(attachment.uuid);
+      uploadTask.defer.promise.then(function(task) {
+        attachment.uuid = task.response.uuid;
+        deferred.resolve();
+      }, deferred.reject, function(uploadTask) {
+        deferred.notify(uploadTask.progress);
+      });
 
-    if (removedAttachmentIndex !== -1) {
-      linShareAttachmentUUIDs.splice(removedAttachmentIndex, 1);
+      uploader.start();
+
+      return {
+        cancel: uploadTask.cancel,
+        promise: deferred.promise
+      };
     }
 
-    inboxLinshareHelper.setLinShareAttachmentUUIDsToEmailHeader(email, linShareAttachmentUUIDs);
-  }
+    function fileToAttachment(file) {
+      return {
+        attachmentType: INBOX_LINSHARE_ATTACHMENT_TYPE,
+        name: file.name,
+        size: file.size,
+        type: file.type || DEFAULT_FILE_TYPE,
+        isInline: false,
+        getFile: function() {
+          return file;
+        }
+      };
+    }
 
-  function handleErrorOnUploading(e) {
-    let error = inboxLinshareErrors(e);
+    function removeAttachment(email, attachment) {
+      let linShareAttachmentUUIDs = inboxLinshareHelper.getLinShareAttachmentUUIDsFromEmailHeader(email);
+      let removedAttachmentIndex = linShareAttachmentUUIDs.indexOf(attachment.uuid);
 
-    return error && notificationFactory.weakError('Upload failed', error.message);
-  }
-}
+      if (removedAttachmentIndex !== -1) {
+        linShareAttachmentUUIDs.splice(removedAttachmentIndex, 1);
+      }
+
+      inboxLinshareHelper.setLinShareAttachmentUUIDsToEmailHeader(email, linShareAttachmentUUIDs);
+    }
+
+    function handleErrorOnUploading(e) {
+      let error = inboxLinshareErrors(e);
+
+      return error && notificationFactory.weakError('Upload failed', error.message);
+    }
+  });

@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('linagora.esn.unifiedinbox.linshare')
-  .factory('inboxLinshareHelper', inboxLinshareHelper);
-
-function inboxLinshareHelper(
+  .factory('inboxLinshareHelper', function(
   $q,
   INBOX_LINSHARE_ATTACHMENT_TYPE,
   DEFAULT_FILE_TYPE
@@ -37,4 +35,4 @@ function inboxLinshareHelper(
     email.headers = email.headers || {};
     email.headers.LinShareAttachmentUUIDs = uuids.join(',');
   }
-}
+});

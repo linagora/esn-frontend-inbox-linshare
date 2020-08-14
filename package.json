@@ -10,6 +10,8 @@
   "license": "AGPLv3",
   "dependencies": {
     "esn-frontend-common-libs": "github:openpaas-suite/esn-frontend-common-libs#main",
-    "esn-frontend-linshare": "github:openpaas-suite/esn-frontend-linshare#main"
+    "esn-frontend-inbox": "github:openpaas-suite/esn-frontend-inbox#main",
+    "esn-frontend-linshare": "github:openpaas-suite/esn-frontend-linshare#main",
+    "lodash": "2.4.1"
   }
 }
