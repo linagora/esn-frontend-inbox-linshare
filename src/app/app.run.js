@@ -9,7 +9,6 @@ function run(
   inboxLinsharePrecomposingHook,
   inboxEmailSendingHookService,
   inboxEmailComposingHookService,
-  dynamicDirectiveService,
   linshareConfigurationService
 ) {
   linshareConfigurationService.isConfigured().then(function(isConfigured) {
@@ -17,16 +16,6 @@ function run(
       return;
     }
 
-    let ddDesktop = new dynamicDirectiveService.DynamicDirective(function() { return true; }, 'inbox-linshare-composer-select-attachment', {
-      attributes: [{ name: 'email', value: '$ctrl.message' }]
-    });
-
-    let ddMobile = new dynamicDirectiveService.DynamicDirective(function() { return true; }, 'inbox-linshare-composer-select-attachment', {
-      attributes: [{ name: 'email', value: '$ctrl.message' }, { name: 'is-mobile', value: 'true' }]
-    });
-
-    dynamicDirectiveService.addInjection('inboxComposerExtraButtons', ddDesktop);
-    dynamicDirectiveService.addInjection('inboxMobileComposerExtraButtons', ddMobile);
     inboxAttachmentProviderRegistry.add(inboxLinshareAttachmentProvider);
     inboxEmailSendingHookService.registerPreSendingHook(inboxLinsharePresendingHook);
     inboxEmailComposingHookService.registerPreComposingHook(inboxLinsharePrecomposingHook);
