@@ -1,6 +1,5 @@
 angular.module('linagora.esn.unifiedinbox.linshare')
   .run(run)
-  .run(injectAttachmentSaveAction);
 
 function run(
   inboxAttachmentProviderRegistry,
@@ -20,13 +19,4 @@ function run(
     inboxEmailSendingHookService.registerPreSendingHook(inboxLinsharePresendingHook);
     inboxEmailComposingHookService.registerPreComposingHook(inboxLinsharePrecomposingHook);
   });
-}
-
-function injectAttachmentSaveAction(dynamicDirectiveService) {
-  let saveAction = new dynamicDirectiveService.DynamicDirective(true, 'inbox-linshare-attachment-save-action', {
-    attributes: [{ name: 'attachment', value: 'attachment' }],
-    priority: -10
-  });
-
-  dynamicDirectiveService.addInjection('attachments-action-list', saveAction);
 }
