@@ -10,12 +10,11 @@ describe('The inboxLinsharePrecomposingHook service', function() {
   let linshareApiClient, inboxLinsharePrecomposingHook;
   let INBOX_LINSHARE_ATTACHMENT_TYPE;
 
-  beforeEach(module('linagora.esn.unifiedinbox.linshare'));
+  beforeEach(angular.mock.module('linagora.esn.unifiedinbox.linshare'));
 
-  beforeEach(inject(function(
+  beforeEach(angular.mock.inject(function(
     _$q_,
     _$rootScope_,
-    _emailSendingService_,
     _linshareApiClient_,
     _inboxLinsharePrecomposingHook_,
     _INBOX_LINSHARE_ATTACHMENT_TYPE_

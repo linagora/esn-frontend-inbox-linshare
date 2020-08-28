@@ -11,13 +11,13 @@ describe('The inboxLinshareAttachmentProvider service', function() {
   let INBOX_LINSHARE_ATTACHMENT_TYPE;
 
   beforeEach(function() {
-    module('linagora.esn.unifiedinbox.linshare', function($provide) {
+    angular.mock.module('linagora.esn.unifiedinbox.linshare', function($provide) {
       $provide.value('notificationFactory', {
         weakError: sinon.spy()
       });
     });
 
-    inject(function(_$rootScope_, _$q_, _inboxLinshareAttachmentProvider_, _notificationFactory_, _INBOX_LINSHARE_ATTACHMENT_TYPE_) {
+    angular.mock.inject(function(_$rootScope_, _$q_, _inboxLinshareAttachmentProvider_, _notificationFactory_, _INBOX_LINSHARE_ATTACHMENT_TYPE_) {
       $rootScope = _$rootScope_;
       $q = _$q_;
       inboxLinshareAttachmentProvider = _inboxLinshareAttachmentProvider_;

@@ -4,9 +4,9 @@ describe('The inboxLinshareApiClient service', function() {
   let $httpBackend;
   let inboxLinshareApiClient;
 
-  beforeEach(module('linagora.esn.unifiedinbox.linshare'));
+  beforeEach(angular.mock.module('linagora.esn.unifiedinbox.linshare'));
 
-  beforeEach(inject(function(_$httpBackend_, _inboxLinshareApiClient_) {
+  beforeEach(angular.mock.inject(function(_$httpBackend_, _inboxLinshareApiClient_) {
     $httpBackend = _$httpBackend_;
     inboxLinshareApiClient = _inboxLinshareApiClient_;
   }));

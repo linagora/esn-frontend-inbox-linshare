@@ -13,6 +13,7 @@ angular.module('linagora.esn.unifiedinbox.linshare', [
   'linagora.esn.linshare'
 ]);
 
+require('esn-frontend-inbox/src/esn.inbox.libs/app/app.module');
 require('esn-frontend-linshare/src/index');
 require('esn-frontend-common-libs/src/frontend/js/modules/async-action');
 require('esn-frontend-common-libs/src/frontend/js/modules/background');

@@ -9,9 +9,9 @@ describe('The inboxLinshareComposerSelectAttachmentController', function() {
   let $modalMock, onInsertMock;
 
   beforeEach(function() {
-    module('linagora.esn.unifiedinbox.linshare');
+    angular.mock.module('linagora.esn.unifiedinbox.linshare');
 
-    module(function($provide) {
+    angular.mock.module(function($provide) {
       $modalMock = function(options) {
         onInsertMock = options.locals.onInsert;
       };
@@ -19,7 +19,7 @@ describe('The inboxLinshareComposerSelectAttachmentController', function() {
       $provide.value('$modal', $modalMock);
     });
 
-    inject(function(_$rootScope_, _$controller_) {
+    angular.mock.inject(function(_$rootScope_, _$controller_) {
       $rootScope = _$rootScope_;
       $controller = _$controller_;
     });
