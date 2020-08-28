@@ -5,13 +5,14 @@
 
 let expect = chai.expect;
 
+
 describe('The inboxLinshareAttachmentSaveAction component', function() {
-  let $rootScope, $compile, $q;
+  let $rootScope, $compile;
   let inboxLinshareAttachmentSaveActionService, linshareApiClient;
   let scope, attachmentMock, configMock;
 
   beforeEach(function() {
-    module('esn.configuration', function($provide) {
+    angular.mock.module('esn.configuration', function($provide) {
       $provide.constant('esnConfig', function() {
         return $q.when(configMock);
       });
@@ -19,19 +20,16 @@ describe('The inboxLinshareAttachmentSaveAction component', function() {
   });
 
   beforeEach(function() {
-    module('jadeTemplates');
-    module('linagora.esn.unifiedinbox.linshare');
+    angular.mock.module('linagora.esn.unifiedinbox.linshare');
 
-    inject(function(
+    angular.mock.inject(function(
       _$compile_,
       _$rootScope_,
-      _$q_,
       _linshareApiClient_,
       _inboxLinshareAttachmentSaveActionService_
     ) {
       $rootScope = _$rootScope_;
       $compile = _$compile_;
-      $q = _$q_;
       inboxLinshareAttachmentSaveActionService = _inboxLinshareAttachmentSaveActionService_;
       linshareApiClient = _linshareApiClient_;
 

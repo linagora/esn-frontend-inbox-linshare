@@ -11,9 +11,10 @@ describe('The inboxLinsharePresendingHook service', function() {
   let linshareAttachment, jmapAttachment;
   let INBOX_LINSHARE_EMAIL_ADDITIONAL_MESSAGE_TEMPLATES;
 
-  beforeEach(module('linagora.esn.unifiedinbox.linshare'));
+  beforeEach(angular.mock.module('linagora.esn.unifiedinbox.linshare'));
+  beforeEach(angular.mock.module('esn.inbox.libs'));
 
-  beforeEach(inject(function(
+  beforeEach(angular.mock.inject(function(
     _$q_,
     _$rootScope_,
     _emailSendingService_,

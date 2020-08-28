@@ -8,9 +8,9 @@ describe('The inboxLinshareHelper service', function() {
   let $q;
   let inboxLinshareHelper;
 
-  beforeEach(module('linagora.esn.unifiedinbox.linshare'));
+  beforeEach(angular.mock.module('linagora.esn.unifiedinbox.linshare'));
 
-  beforeEach(inject(function(_$q_, _inboxLinshareHelper_) {
+  beforeEach(angular.mock.inject(function(_$q_, _inboxLinshareHelper_) {
     $q = _$q_;
     inboxLinshareHelper = _inboxLinshareHelper_;
   }));

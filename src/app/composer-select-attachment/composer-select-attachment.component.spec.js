@@ -11,9 +11,8 @@ describe('The inboxLinshareComposerSelectAttachment component', function() {
   beforeEach(function() {
     $modal = sinon.spy();
 
-    module('jadeTemplates');
-    module('linagora.esn.unifiedinbox.linshare');
-    module(function($provide) {
+    angular.mock.module('linagora.esn.unifiedinbox.linshare');
+    angular.mock.module(function($provide) {
       $provide.value('$modal', $modal);
       $provide.value('maxPlusFilter', function(value) { return value; });
     });

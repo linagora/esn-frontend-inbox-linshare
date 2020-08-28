@@ -14,9 +14,9 @@ describe('The inboxLinshareErrors service', function() {
   };
 
   beforeEach(function() {
-    module('linagora.esn.unifiedinbox.linshare');
+    angular.mock.module('linagora.esn.unifiedinbox.linshare');
 
-    inject(function(_inboxLinshareErrors_) {
+    angular.mock.inject(function(_inboxLinshareErrors_) {
       inboxLinshareErrors = _inboxLinshareErrors_;
     });
 

@@ -9,9 +9,9 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
   let $rootScope, $q;
   let linshareApiClient, inboxLinshareApiClient, inboxLinshareAttachmentSaveActionService;
 
-  beforeEach(module('linagora.esn.unifiedinbox.linshare'));
+  beforeEach(angular.mock.module('linagora.esn.unifiedinbox.linshare'));
 
-  beforeEach(inject(function(
+  beforeEach(angular.mock.inject(function(
     _$rootScope_,
     _$q_,
     _linshareApiClient_,
