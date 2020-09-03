@@ -26,3 +26,17 @@ curl -X POST -H 'Accept: application/json' -H 'Content-Type: application/json'  
 > **PS**  You need to use ``` \n ``` to attach the lines of the public key in the PEM format.
 
 **To test the connector u need to have the same user in the two domains of OpenPaaS and LinShare.**
+
+## Running tests
+
+You can run tests by executing the following command:
+
+```sh
+npm run test
+```
+
+Note that there is a 10000ms timeout by default. If you want to change that, simply pass the **TEST_TIMEOUT** environment variable:
+
+```sh
+TEST_TIMEOUT=2000 npm run test
+```
