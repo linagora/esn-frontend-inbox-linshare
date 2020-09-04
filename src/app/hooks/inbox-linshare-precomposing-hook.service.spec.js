@@ -3,7 +3,7 @@
 /* global chai: false */
 /* global sinon: false */
 
-let expect = chai.expect;
+const expect = chai.expect;
 
 describe('The inboxLinsharePrecomposingHook service', function() {
   let $q, $rootScope;
@@ -27,7 +27,7 @@ describe('The inboxLinsharePrecomposingHook service', function() {
   }));
 
   it('should do nothing if there is no email headers', function() {
-    let email = {};
+    const email = {};
 
     inboxLinsharePrecomposingHook(email);
 
@@ -37,7 +37,7 @@ describe('The inboxLinsharePrecomposingHook service', function() {
   });
 
   it('should do nothing if there is no LinShareAttachmentUUIDs in the email headers', function() {
-    let email = {
+    const email = {
       headers: {}
     };
 
@@ -51,7 +51,7 @@ describe('The inboxLinsharePrecomposingHook service', function() {
   });
 
   it('should do nothing if there is an empty LinShareAttachmentUUIDs list in the email headers', function() {
-    let email = {
+    const email = {
       headers: {
         LinShareAttachmentUUIDs: ''
       }
@@ -70,7 +70,7 @@ describe('The inboxLinsharePrecomposingHook service', function() {
 
   describe('There is LinShare attachment uuids in the email headers', function() {
     it('should set the status of LinShare attachment in the email body to loading when loading the document', function() {
-      let email = {
+      const email = {
         headers: {
           LinShareAttachmentUUIDs: 'uuid1'
         },
@@ -91,7 +91,7 @@ describe('The inboxLinsharePrecomposingHook service', function() {
     });
 
     it('should set the status of LinShare attachment in the email body to load-error if failed to load the document', function() {
-      let email = {
+      const email = {
         headers: {
           LinShareAttachmentUUIDs: 'uuid1'
         },
@@ -113,7 +113,7 @@ describe('The inboxLinsharePrecomposingHook service', function() {
     });
 
     it('should update the LinShare attachment information in the email body if success to load the document', function() {
-      let email = {
+      const email = {
         headers: {
           LinShareAttachmentUUIDs: 'uuid1,uuid2'
         },

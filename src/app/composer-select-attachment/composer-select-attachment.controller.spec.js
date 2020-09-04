@@ -2,7 +2,7 @@
 
 /* global chai: false */
 
-let expect = chai.expect;
+const expect = chai.expect;
 
 describe('The inboxLinshareComposerSelectAttachmentController', function() {
   let $rootScope, $scope, $controller;
@@ -28,7 +28,7 @@ describe('The inboxLinshareComposerSelectAttachmentController', function() {
   function initController(scope) {
     $scope = scope || $rootScope.$new();
 
-    let controller = $controller('inboxLinshareComposerSelectAttachmentController', { $scope: $scope }, { email: {} });
+    const controller = $controller('inboxLinshareComposerSelectAttachmentController', { $scope: $scope }, { email: {} });
 
     $scope.$digest();
 
@@ -39,8 +39,8 @@ describe('The inboxLinshareComposerSelectAttachmentController', function() {
 
   describe('The #insertLinshareDocuments function', function() {
     it('should update LinShareAttachmentsUUIDs list', function() {
-      let controller = initController();
-      let attachments = [{
+      const controller = initController();
+      const attachments = [{
         attachmentType: 'linshare',
         uuid: 'attachment1'
       }, {

@@ -39,9 +39,9 @@ function inboxLinshareAttachmentSaveActionController(
     }, function() {
       return inboxLinshareAttachmentSaveActionService.saveAttachmentToLinshare(self.attachment).then(checkMapping);
     })
-    .catch(function() {
-      self.status = INBOX_LINSHARE_ATTACHMENT_MAPPING_STATUS.error;
-    });
+      .catch(function() {
+        self.status = INBOX_LINSHARE_ATTACHMENT_MAPPING_STATUS.error;
+      });
   }
 
   function checkMapping(attachmentMapping) {
@@ -76,7 +76,7 @@ function inboxLinshareAttachmentSaveActionController(
         return linshareInstanceURL + '#/files/list?fileUuid=' + attachmentId;
       })
       .catch(function() {
-        return;
+
       });
   }
 }

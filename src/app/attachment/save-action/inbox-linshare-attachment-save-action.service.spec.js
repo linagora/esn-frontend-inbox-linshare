@@ -3,7 +3,7 @@
 /* global chai: false */
 /* global sinon: false */
 
-let expect = chai.expect;
+const expect = chai.expect;
 
 describe('The inboxLinshareAttachmentSaveActionService service', function() {
   let $rootScope, $q;
@@ -33,8 +33,8 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
 
   describe('The getAttachmentMapping fn', function() {
     it('should resolve the only one mapping filter by blobId', function(done) {
-      let attachmentMappings = [{ blobId: 1 }];
-      let attachment = { blobId: 1 };
+      const attachmentMappings = [{ blobId: 1 }];
+      const attachment = { blobId: 1 };
 
       inboxLinshareApiClient.getAttachments = sinon.stub().returns($q.when(attachmentMappings));
 
@@ -47,8 +47,8 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
     });
 
     it('should resolve nothing when there is no mapping matched the blobId', function(done) {
-      let attachmentMappings = [];
-      let attachment = { blobId: 1 };
+      const attachmentMappings = [];
+      const attachment = { blobId: 1 };
 
       inboxLinshareApiClient.getAttachments = sinon.stub().returns($q.when(attachmentMappings));
 
@@ -63,8 +63,8 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
 
   describe('The saveAttachmentToLinshare fn', function() {
     it('should create LinShare document by download URL of the attachment', function() {
-      let downloadUrl = 'http://abc.com/download.pdf';
-      let attachment = {
+      const downloadUrl = 'http://abc.com/download.pdf';
+      const attachment = {
         name: 'my file.pdf',
         getSignedDownloadUrl: sinon.stub().returns($q.when(downloadUrl))
       };
@@ -84,8 +84,8 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
     });
 
     it('should reject when the async task is marked as failed', function(done) {
-      let downloadUrl = 'http://abc.com/download.pdf';
-      let attachment = {
+      const downloadUrl = 'http://abc.com/download.pdf';
+      const attachment = {
         name: 'my file.pdf',
         getSignedDownloadUrl: sinon.stub().returns($q.when(downloadUrl))
       };
@@ -103,12 +103,12 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
     });
 
     it('should create attachment mapping to track the async task', function() {
-      let downloadUrl = 'http://abc.com/download.pdf';
-      let attachment = {
+      const downloadUrl = 'http://abc.com/download.pdf';
+      const attachment = {
         name: 'my file.pdf',
         getSignedDownloadUrl: sinon.stub().returns($q.when(downloadUrl))
       };
-      let asyncTask = {
+      const asyncTask = {
         status: linshareApiClient.ASYNC_TASK_STATUS.PENDING,
         async: { uuid: '123' }
       };
@@ -126,12 +126,12 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
     });
 
     it('should create attachment mapping with documentId when async task is marked as SUCCESS right after creation', function() {
-      let downloadUrl = 'http://abc.com/download.pdf';
-      let attachment = {
+      const downloadUrl = 'http://abc.com/download.pdf';
+      const attachment = {
         name: 'my file.pdf',
         getSignedDownloadUrl: sinon.stub().returns($q.when(downloadUrl))
       };
-      let asyncTask = {
+      const asyncTask = {
         uuid: '468',
         status: linshareApiClient.ASYNC_TASK_STATUS.SUCCESS,
         async: { uuid: '123', resourceUuid: '456' }
@@ -161,13 +161,13 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
     }));
 
     it('should reject when async task is marked as FAILED', function(done) {
-      let asyncTask = {
+      const asyncTask = {
         status: linshareApiClient.ASYNC_TASK_STATUS.FAILED
       };
-      let attachmentMapping = {
+      const attachmentMapping = {
         asyncTaskId: '123'
       };
-      let scope = $rootScope.$new();
+      const scope = $rootScope.$new();
 
       linshareApiClient.getDocumentAsyncTaskById = sinon.stub().returns($q.when(asyncTask));
 
@@ -180,16 +180,16 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
     });
 
     it('should update attachment mapping when async task is marked as SUCCESS', function() {
-      let asyncTask = {
+      const asyncTask = {
         uuid: '456',
         resourceUuid: 'jqka',
         status: linshareApiClient.ASYNC_TASK_STATUS.SUCCESS
       };
-      let attachmentMapping = {
+      const attachmentMapping = {
         id: '789',
         asyncTaskId: '123'
       };
-      let scope = $rootScope.$new();
+      const scope = $rootScope.$new();
 
       linshareApiClient.getDocumentAsyncTaskById = sinon.stub().returns($q.when(asyncTask));
       inboxLinshareApiClient.updateAttachment = sinon.stub().returns($q.when());
@@ -203,11 +203,11 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
     });
 
     it('should skip interval when last step is not done', function() {
-      let attachmentMapping = {
+      const attachmentMapping = {
         id: '789',
         asyncTaskId: '123'
       };
-      let scope = $rootScope.$new();
+      const scope = $rootScope.$new();
 
       linshareApiClient.getDocumentAsyncTaskById = sinon.stub().returns($q.defer().promise);
 
@@ -219,11 +219,11 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
     });
 
     it('should try again when last step is done', function() {
-      let attachmentMapping = {
+      const attachmentMapping = {
         id: '789',
         asyncTaskId: '123'
       };
-      let scope = $rootScope.$new();
+      const scope = $rootScope.$new();
 
       linshareApiClient.getDocumentAsyncTaskById = sinon.stub().returns($q.when({}));
 
@@ -235,11 +235,11 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
     });
 
     it('should stop the poller when scope is destroyed', function() {
-      let attachmentMapping = {
+      const attachmentMapping = {
         id: '789',
         asyncTaskId: '123'
       };
-      let scope = $rootScope.$new();
+      const scope = $rootScope.$new();
 
       linshareApiClient.getDocumentAsyncTaskById = sinon.stub().returns($q.when({}));
 
@@ -254,16 +254,16 @@ describe('The inboxLinshareAttachmentSaveActionService service', function() {
     });
 
     it('should resolve with the documentId when async task is marked as SUCCESS and success to update attachment mapping', function(done) {
-      let asyncTask = {
+      const asyncTask = {
         uuid: '456',
         resourceUuid: 'jqka',
         status: linshareApiClient.ASYNC_TASK_STATUS.SUCCESS
       };
-      let attachmentMapping = {
+      const attachmentMapping = {
         id: '789',
         asyncTaskId: '123'
       };
-      let scope = $rootScope.$new();
+      const scope = $rootScope.$new();
 
       linshareApiClient.getDocumentAsyncTaskById = sinon.stub().returns($q.when(asyncTask));
       inboxLinshareApiClient.updateAttachment = sinon.stub().returns($q.when());

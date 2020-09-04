@@ -3,7 +3,7 @@
 /* global chai: false */
 /* global sinon: false */
 
-let expect = chai.expect;
+const expect = chai.expect;
 
 describe('The inboxLinshareComposerSelectAttachment component', function() {
   let $modal, $rootScope, $compile;
@@ -26,7 +26,7 @@ describe('The inboxLinshareComposerSelectAttachment component', function() {
   function initComponent(template, scope) {
     scope = scope || $rootScope.$new();
 
-    let element = $compile(template)(scope);
+    const element = $compile(template)(scope);
 
     scope.$digest();
 
@@ -34,8 +34,8 @@ describe('The inboxLinshareComposerSelectAttachment component', function() {
   }
 
   it('should open LinShare files browser when user click on LinShare button', function() {
-    let scope = $rootScope.$new();
-    let email = {
+    const scope = $rootScope.$new();
+    const email = {
       attachments: [{
         attachmentType: 'linshare',
         name: 'attachment1.jpg',
@@ -46,21 +46,21 @@ describe('The inboxLinshareComposerSelectAttachment component', function() {
 
     scope.email = email;
 
-    let element = initComponent('<inbox-linshare-composer-select-attachment email="email" />', scope);
+    const element = initComponent('<inbox-linshare-composer-select-attachment email="email" />', scope);
 
     element.find('button')[0].click();
     expect($modal).to.have.been.called;
   });
 
   it('should update number of linshare attachment and display it on LinShare button', function() {
-    let scope = $rootScope.$new();
-    let attachment1 = {
+    const scope = $rootScope.$new();
+    const attachment1 = {
       attachmentType: 'linshare',
       name: 'attachment1.jpg',
       size: 416331,
       type: 'image/jpeg'
     };
-    let attachment2 = {
+    const attachment2 = {
       attachmentType: 'linshare',
       name: 'attachment2.jpg',
       size: 416331,
@@ -71,7 +71,7 @@ describe('The inboxLinshareComposerSelectAttachment component', function() {
       attachments: [attachment1]
     };
 
-    let element = initComponent('<inbox-linshare-composer-select-attachment email="email" />', scope);
+    const element = initComponent('<inbox-linshare-composer-select-attachment email="email" />', scope);
 
     expect(element.find('.composer-badge').text()).to.equal('1');
     scope.email.attachments.push(attachment2);
@@ -81,18 +81,18 @@ describe('The inboxLinshareComposerSelectAttachment component', function() {
   });
 
   it('should not display number of LinShare attachment if there is no LinShare attachment', function() {
-    let scope = $rootScope.$new();
+    const scope = $rootScope.$new();
 
     scope.email = {
       attachments: []
     };
-    let element = initComponent('<inbox-linshare-composer-select-attachment email="email" />', scope);
+    const element = initComponent('<inbox-linshare-composer-select-attachment email="email" />', scope);
 
     expect(element.find('.composer-badge').hasClass('ng-hide')).to.be.true;
   });
 
   it('should flash when an LinShare attachment is uploading', function() {
-    let scope = $rootScope.$new();
+    const scope = $rootScope.$new();
 
     scope.email = {
       attachments: [
@@ -105,7 +105,7 @@ describe('The inboxLinshareComposerSelectAttachment component', function() {
         }
       ]
     };
-    let element = initComponent('<inbox-linshare-composer-select-attachment email="email" />', scope);
+    const element = initComponent('<inbox-linshare-composer-select-attachment email="email" />', scope);
 
     expect(element.find('.linshare-uploading').length).to.equal(1);
     scope.email.attachments[0].status = 'uploaded';
@@ -114,7 +114,7 @@ describe('The inboxLinshareComposerSelectAttachment component', function() {
   });
 
   it('should notify user when upload LinShare attachment unsuccessfully', function() {
-    let scope = $rootScope.$new();
+    const scope = $rootScope.$new();
 
     scope.email = {
       attachments: [
@@ -127,7 +127,7 @@ describe('The inboxLinshareComposerSelectAttachment component', function() {
         }
       ]
     };
-    let element = initComponent('<inbox-linshare-composer-select-attachment email="email" />', scope);
+    const element = initComponent('<inbox-linshare-composer-select-attachment email="email" />', scope);
 
     expect(element.find('.error').length).to.equal(1);
   });

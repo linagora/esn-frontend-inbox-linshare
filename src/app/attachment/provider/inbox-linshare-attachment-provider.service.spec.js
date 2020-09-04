@@ -3,7 +3,7 @@
 /* global chai: false */
 /* global sinon: false */
 
-let expect = chai.expect;
+const expect = chai.expect;
 
 describe('The inboxLinshareAttachmentProvider service', function() {
   let $rootScope, $q;
@@ -43,8 +43,8 @@ describe('The inboxLinshareAttachmentProvider service', function() {
     }));
 
     it('should use fileUploadService to upload file', function() {
-      let file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
-      let attachment = {
+      const file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
+      const attachment = {
         getFile: function() {
           return file;
         }
@@ -61,14 +61,14 @@ describe('The inboxLinshareAttachmentProvider service', function() {
     });
 
     it('should assign document UUID to the attachment object on success', function() {
-      let file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
-      let attachment = {
+      const file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
+      const attachment = {
         getFile: function() {
           return file;
         }
       };
-      let document = { uuid: '1212' };
-      let defer = $q.defer();
+      const document = { uuid: '1212' };
+      const defer = $q.defer();
 
       uploaderMock.addFile.returns({ defer: defer });
 
@@ -81,15 +81,15 @@ describe('The inboxLinshareAttachmentProvider service', function() {
     });
 
     it('should return promise that resolve on success', function() {
-      let file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
-      let attachment = {
+      const file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
+      const attachment = {
         getFile: function() {
           return file;
         }
       };
-      let document = { uuid: '1212' };
-      let defer = $q.defer();
-      let successSpy = sinon.spy();
+      const document = { uuid: '1212' };
+      const defer = $q.defer();
+      const successSpy = sinon.spy();
 
       uploaderMock.addFile.returns({ defer: defer });
 
@@ -102,15 +102,15 @@ describe('The inboxLinshareAttachmentProvider service', function() {
     });
 
     it('should return promise that reject on failure', function() {
-      let file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
-      let attachment = {
+      const file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
+      const attachment = {
         getFile: function() {
           return file;
         }
       };
-      let defer = $q.defer();
-      let catchSpy = sinon.spy();
-      let error = new Error('an_error');
+      const defer = $q.defer();
+      const catchSpy = sinon.spy();
+      const error = new Error('an_error');
 
       uploaderMock.addFile.returns({ defer: defer });
 
@@ -123,14 +123,14 @@ describe('The inboxLinshareAttachmentProvider service', function() {
     });
 
     it('should return promise to be notified the upload progress', function() {
-      let file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
-      let attachment = {
+      const file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
+      const attachment = {
         getFile: function() {
           return file;
         }
       };
-      let defer = $q.defer();
-      let notifySpy = sinon.spy();
+      const defer = $q.defer();
+      const notifySpy = sinon.spy();
 
       uploaderMock.addFile.returns({ defer: defer });
 
@@ -146,13 +146,13 @@ describe('The inboxLinshareAttachmentProvider service', function() {
     });
 
     it('should return cancel function of the upload promise', function() {
-      let file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
-      let attachment = {
+      const file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
+      const attachment = {
         getFile: function() {
           return file;
         }
       };
-      let cancelSpy = sinon.spy();
+      const cancelSpy = sinon.spy();
 
       uploaderMock.addFile.returns({ defer: $q.defer(), cancel: cancelSpy });
 
@@ -164,8 +164,8 @@ describe('The inboxLinshareAttachmentProvider service', function() {
 
   describe('The fileToAttachment fn', function() {
     it('should return the LinShare virtual attachment', function() {
-      let file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
-      let attachment = inboxLinshareAttachmentProvider.fileToAttachment(file);
+      const file = { name: 'Learn_JS_in_6_hours.pdf', size: 12345 };
+      const attachment = inboxLinshareAttachmentProvider.fileToAttachment(file);
 
       expect(attachment).to.shallowDeepEqual({
         attachmentType: INBOX_LINSHARE_ATTACHMENT_TYPE,
@@ -178,10 +178,10 @@ describe('The inboxLinshareAttachmentProvider service', function() {
 
   describe('The #removeAttachment function', function() {
     it('should remove the corresponding attachment uuid in the list LinShareAttachmentUUIDs in email header', function() {
-      let attachment = {
+      const attachment = {
         uuid: 'uuid1'
       };
-      let email = {
+      const email = {
         headers: {
           LinShareAttachmentUUIDs: 'uuid1,uuid2'
         }
@@ -193,10 +193,10 @@ describe('The inboxLinshareAttachmentProvider service', function() {
     });
 
     it('should do nothing if the removed attachment uuid is not in the list LinShareAttachmentUUIDs in email header', function() {
-      let attachment = {
+      const attachment = {
         uuid: 'abc'
       };
-      let email = {
+      const email = {
         headers: {
           LinShareAttachmentUUIDs: 'uuid1,uuid2'
         }
@@ -210,7 +210,7 @@ describe('The inboxLinshareAttachmentProvider service', function() {
 
   describe('The handleErrorOnUploading function', function() {
     it('should call notification for warning to user if file size is reached LinShare max size', function() {
-      let error = {
+      const error = {
         status: 403,
         data: { errCode: 46010 }
       };
@@ -221,7 +221,7 @@ describe('The inboxLinshareAttachmentProvider service', function() {
     });
 
     it('should call notification for warning to user if LinShare account quota is reached', function() {
-      let error = {
+      const error = {
         status: 403,
         data: { errCode: 46011 }
       };

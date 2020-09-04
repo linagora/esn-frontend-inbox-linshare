@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+
 require('../helper/inbox-linshare-helper.service');
 require('../app.constants');
 
@@ -52,10 +53,10 @@ function inboxLinshareComposerSelectAttachmentController(
   }
 
   function insertLinshareDocuments(documents) {
-    let linShareAttachmentUUIDs = inboxLinshareHelper.getLinShareAttachmentUUIDsFromEmailHeader(self.email);
+    const linShareAttachmentUUIDs = inboxLinshareHelper.getLinShareAttachmentUUIDsFromEmailHeader(self.email);
 
     documents.forEach(function(document) {
-      let attachment = inboxLinshareHelper.documentToAttachment(document);
+      const attachment = inboxLinshareHelper.documentToAttachment(document);
 
       self.email.attachments.push(attachment);
 

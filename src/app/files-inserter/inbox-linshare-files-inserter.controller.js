@@ -4,7 +4,7 @@ angular.module('linagora.esn.unifiedinbox.linshare')
   .controller('inboxLinshareFilesInserterController', inboxLinshareFilesInserterController);
 
 function inboxLinshareFilesInserterController(onInsert) {
-  let self = this;
+  const self = this;
 
   self.insert = insert;
 

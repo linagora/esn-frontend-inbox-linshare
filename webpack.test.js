@@ -13,7 +13,7 @@ module.exports = merge(commonWebpackConfig, {
   devtool: 'source-map',
   output: {
     filename: 'bundle-test.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist')
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(
@@ -32,7 +32,7 @@ module.exports = merge(commonWebpackConfig, {
         loader: 'ignore-loader',
         include: [
           path.resolve(__dirname, 'src/app/app.run.js'),
-          path.resolve(__dirname, 'node_modules/esn-frontend-inbox/src/esn.inbox.libs/app/services/jmap-client-provider/jmap-client-provider.run.js'),
+          path.resolve(__dirname, 'node_modules/esn-frontend-inbox/src/esn.inbox.libs/app/services/jmap-client-provider/jmap-client-provider.run.js')
         ]
       }
     ]

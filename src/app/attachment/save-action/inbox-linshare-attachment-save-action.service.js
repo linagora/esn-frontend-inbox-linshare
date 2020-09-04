@@ -28,7 +28,7 @@ function inboxLinshareAttachmentSaveActionService(
   }
 
   function saveAttachmentToLinshare(attachment) {
-    let promise = attachment.getSignedDownloadUrl()
+    const promise = attachment.getSignedDownloadUrl()
       .then(function(url) {
         return linshareApiClient.createDocumentFromUrl({
           url: url,
@@ -40,7 +40,7 @@ function inboxLinshareAttachmentSaveActionService(
           return $q.reject(new Error('Cannot save attachment to LinShare'));
         }
 
-        let attachmentMapping = {
+        const attachmentMapping = {
           blobId: attachment.blobId,
           asyncTaskId: asyncTask.async.uuid
         };
@@ -56,9 +56,9 @@ function inboxLinshareAttachmentSaveActionService(
   }
 
   function watch(attachmentMapping, scope) {
-    let deferred = $q.defer();
+    const deferred = $q.defer();
     let inProgress = false;
-    let poller = $interval(check, INBOX_LINSHARE_ATTACHMENT_POLLING_INTERVAL);
+    const poller = $interval(check, INBOX_LINSHARE_ATTACHMENT_POLLING_INTERVAL);
 
     scope.$on('$destroy', function() {
       $interval.cancel(poller);
@@ -77,8 +77,8 @@ function inboxLinshareAttachmentSaveActionService(
         .then(function(asyncTask) {
           if (asyncTask.status === linshareApiClient.ASYNC_TASK_STATUS.SUCCESS) {
             return inboxLinshareApiClient.updateAttachment(attachmentMapping.id, {
-                documentId: asyncTask.resourceUuid
-              })
+              documentId: asyncTask.resourceUuid
+            })
               .then(function() {
                 done(null, asyncTask.resourceUuid);
               });
