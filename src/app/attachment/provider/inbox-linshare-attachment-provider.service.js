@@ -1,6 +1,5 @@
 'use strict';
 
-const _ = require('lodash');
 require('../../errors/inbox-linshare-errors.service');
 require('../../helper/inbox-linshare-helper.service');
 require('../../app.constants');
@@ -27,9 +26,9 @@ angular.module('linagora.esn.unifiedinbox.linshare')
     };
 
     function upload(attachment) {
-      let deferred = $q.defer();
-      let uploader = fileUploadService.get(linshareFileUpload);
-      let uploadTask = uploader.addFile(attachment.getFile());
+      const deferred = $q.defer();
+      const uploader = fileUploadService.get(linshareFileUpload);
+      const uploadTask = uploader.addFile(attachment.getFile());
 
       uploadTask.defer.promise.then(function(task) {
         attachment.uuid = task.response.uuid;
@@ -60,8 +59,8 @@ angular.module('linagora.esn.unifiedinbox.linshare')
     }
 
     function removeAttachment(email, attachment) {
-      let linShareAttachmentUUIDs = inboxLinshareHelper.getLinShareAttachmentUUIDsFromEmailHeader(email);
-      let removedAttachmentIndex = linShareAttachmentUUIDs.indexOf(attachment.uuid);
+      const linShareAttachmentUUIDs = inboxLinshareHelper.getLinShareAttachmentUUIDsFromEmailHeader(email);
+      const removedAttachmentIndex = linShareAttachmentUUIDs.indexOf(attachment.uuid);
 
       if (removedAttachmentIndex !== -1) {
         linShareAttachmentUUIDs.splice(removedAttachmentIndex, 1);
@@ -71,7 +70,7 @@ angular.module('linagora.esn.unifiedinbox.linshare')
     }
 
     function handleErrorOnUploading(e) {
-      let error = inboxLinshareErrors(e);
+      const error = inboxLinshareErrors(e);
 
       return error && notificationFactory.weakError('Upload failed', error.message);
     }

@@ -1,5 +1,5 @@
 angular.module('linagora.esn.unifiedinbox.linshare')
-  .run(run)
+  .run(run);
 
 function run(
   inboxAttachmentProviderRegistry,

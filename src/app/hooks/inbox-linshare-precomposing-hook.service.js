@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+
 require('../helper/inbox-linshare-helper.service');
 require('../app.constants');
 
@@ -18,7 +19,7 @@ angular.module('linagora.esn.unifiedinbox.linshare')
       }
 
       linShareAttachmentUUIDs.forEach(function(uuid) {
-        let documentToAttach = {
+        const documentToAttach = {
           uuid: uuid,
           attachmentType: INBOX_LINSHARE_ATTACHMENT_TYPE,
           status: 'loading'

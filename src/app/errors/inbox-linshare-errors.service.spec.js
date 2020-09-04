@@ -2,12 +2,12 @@
 
 /* global chai: false */
 
-let expect = chai.expect;
+const expect = chai.expect;
 
 describe('The inboxLinshareErrors service', function() {
   let inboxLinshareErrors;
   let error;
-  let ERROR = {
+  const ERROR = {
     status: 403,
     errCode: 46010,
     message: 'Your attachment size reaches the LinShare limitation'
@@ -30,27 +30,27 @@ describe('The inboxLinshareErrors service', function() {
 
   it('should return undefined if error does not have data', function() {
     delete error.data;
-    let result = inboxLinshareErrors(error);
+    const result = inboxLinshareErrors(error);
 
     expect(result).to.be.undefined;
   });
 
   it('should return undefined if error does not have data', function() {
     error.status = 1;
-    let result = inboxLinshareErrors(error);
+    const result = inboxLinshareErrors(error);
 
     expect(result).to.be.undefined;
   });
 
   it('should return undefined if error does not have detected errCode', function() {
     error.data.errCode = 1;
-    let result = inboxLinshareErrors(error);
+    const result = inboxLinshareErrors(error);
 
     expect(result).to.be.undefined;
   });
 
   it('should return the error on the list if error is satisfied', function() {
-    let result = inboxLinshareErrors(error);
+    const result = inboxLinshareErrors(error);
 
     expect(result).to.deep.equals(ERROR);
   });

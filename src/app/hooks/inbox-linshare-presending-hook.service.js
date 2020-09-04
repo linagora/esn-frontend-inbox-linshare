@@ -1,6 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
+
 require('../app.constants');
 
 angular.module('linagora.esn.unifiedinbox.linshare')
@@ -13,12 +14,12 @@ angular.module('linagora.esn.unifiedinbox.linshare')
     INBOX_LINSHARE_EMAIL_ADDITIONAL_MESSAGE_TEMPLATES
   ) {
     return function(email) {
-      let documents = _.remove(email.attachments, function(attachment) {
+      const documents = _.remove(email.attachments, function(attachment) {
         return attachment.attachmentType === INBOX_LINSHARE_ATTACHMENT_TYPE;
       }).map(function(attachment) {
         return attachment.uuid;
       }).filter(Boolean);
-      let recipients = emailSendingService.getAllRecipientsExceptSender(email).map(function(recipient) {
+      const recipients = emailSendingService.getAllRecipientsExceptSender(email).map(function(recipient) {
         return { mail: recipient.email };
       });
 
@@ -26,16 +27,16 @@ angular.module('linagora.esn.unifiedinbox.linshare')
         return $q.when();
       }
 
-      let message = documents.length > 1 ?
+      const message = documents.length > 1 ?
         esnI18nService.translate(INBOX_LINSHARE_EMAIL_ADDITIONAL_MESSAGE_TEMPLATES.plural, documents.length).toString() :
         esnI18nService.translate(INBOX_LINSHARE_EMAIL_ADDITIONAL_MESSAGE_TEMPLATES.singular).toString();
 
-      let htmlMessage =
+      const htmlMessage =
         '<br />' +
         '<p style="font-family: Roboto; font-size: 12px; color: rgba(0,0,0,0.65); text-align: center">' +
           '<i>' + message + '</i>' +
         '</p>';
-      let textMessage = '\n\n-----------------------------------\n' + message;
+      const textMessage = '\n\n-----------------------------------\n' + message;
 
       return linshareApiClient.shareDocuments({
         documents: documents,

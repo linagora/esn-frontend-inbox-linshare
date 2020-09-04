@@ -3,7 +3,7 @@
 /* global chai: false */
 /* global sinon: false */
 
-let expect = chai.expect;
+const expect = chai.expect;
 
 describe('The inboxLinsharePresendingHook service', function() {
   let $q, $rootScope;
@@ -46,7 +46,7 @@ describe('The inboxLinsharePresendingHook service', function() {
   }));
 
   it('should call the LinShare API with only linshare attachments', function() {
-    let email = {
+    const email = {
       attachments: [linshareAttachment, jmapAttachment]
     };
 
@@ -64,7 +64,7 @@ describe('The inboxLinsharePresendingHook service', function() {
   });
 
   it('should not call the LinShare API if there is no LinShare attachment', function() {
-    let email = {
+    const email = {
       attachments: [jmapAttachment]
     };
 
@@ -79,7 +79,7 @@ describe('The inboxLinsharePresendingHook service', function() {
   });
 
   it('should not call the LinShare API if there is no recipient', function() {
-    let email = {
+    const email = {
       attachments: [linshareAttachment, jmapAttachment]
     };
 
@@ -92,11 +92,11 @@ describe('The inboxLinsharePresendingHook service', function() {
   });
 
   it('should not call the LinShare API with attachments that do not have uuid', function() {
-    let linshareAttachmentWithoutUuid = {
+    const linshareAttachmentWithoutUuid = {
       name: 'attachmentWithoutUuid',
       attachmentType: 'linshare'
     };
-    let email = {
+    const email = {
       attachments: [linshareAttachmentWithoutUuid, linshareAttachment, jmapAttachment]
     };
 
@@ -114,7 +114,7 @@ describe('The inboxLinsharePresendingHook service', function() {
   });
 
   it('should remove all the attachment with type of linshare from input email ', function() {
-    let email = {
+    const email = {
       attachments: [linshareAttachment, jmapAttachment]
     };
 
@@ -129,7 +129,7 @@ describe('The inboxLinsharePresendingHook service', function() {
   });
 
   it('should append notify message if the email contains LinShare attachment', function() {
-    let email = {
+    const email = {
       attachments: [linshareAttachment, linshareAttachment],
       htmlBody: '<p>email content</p>',
       textBody: 'email content'
@@ -149,7 +149,7 @@ describe('The inboxLinsharePresendingHook service', function() {
   });
 
   it('should append notify message even email does not have body', function() {
-    let email = {
+    const email = {
       attachments: [linshareAttachment]
     };
 
@@ -171,7 +171,7 @@ describe('The inboxLinsharePresendingHook service', function() {
   });
 
   it('should not append notify message if the email does not contain LinShare attachment', function() {
-    let email = {
+    const email = {
       attachments: [jmapAttachment],
       htmlBody: '<p>email content</p>',
       textBody: 'email content'

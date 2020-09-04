@@ -2,7 +2,7 @@
 
 /* global chai: false */
 
-let expect = chai.expect;
+const expect = chai.expect;
 
 describe('The inboxLinshareHelper service', function() {
   let $q;
@@ -17,13 +17,13 @@ describe('The inboxLinshareHelper service', function() {
 
   describe('The documentToAttachment function', function() {
     it('should convert LinShare document to legal Inbox attachment', function() {
-      let linshareDocument = {
+      const linshareDocument = {
         name: 'linshareDocument',
         size: 1000,
         uuid: '123',
         type: 'image/png'
       };
-      let attachment = inboxLinshareHelper.documentToAttachment(linshareDocument);
+      const attachment = inboxLinshareHelper.documentToAttachment(linshareDocument);
 
       expect(attachment).to.deep.equal({
         attachmentType: 'linshare',

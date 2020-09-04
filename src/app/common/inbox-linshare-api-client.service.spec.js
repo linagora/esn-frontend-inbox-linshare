@@ -13,7 +13,7 @@ describe('The inboxLinshareApiClient service', function() {
 
   describe('The createAttachment fn', function() {
     it('should POST to right endpoint to create new attachment', function() {
-      let attachment = { blobId: '12345' };
+      const attachment = { blobId: '12345' };
 
       $httpBackend.expectPOST('/linagora.esn.unifiedinbox.linshare/api/attachments', attachment).respond(201);
 
@@ -24,7 +24,7 @@ describe('The inboxLinshareApiClient service', function() {
 
   describe('The getAttachments fn', function() {
     it('should GET to right endpoint to get attachments', function() {
-      let options = {
+      const options = {
         limit: 10,
         offset: 0
       };
@@ -39,10 +39,10 @@ describe('The inboxLinshareApiClient service', function() {
 
   describe('The updateAttachment fn', function() {
     it('should POST to right endpoint to update attachments', function() {
-      let updateData = {
+      const updateData = {
         documentId: '12345'
       };
-      let attachmentId = '111';
+      const attachmentId = '111';
 
       $httpBackend.expectPOST('/linagora.esn.unifiedinbox.linshare/api/attachments/' + attachmentId, updateData).respond(200, []);
 
