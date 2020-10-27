@@ -25,6 +25,7 @@ require('esn-frontend-common-libs/src/frontend/js/modules/lodash-wrapper');
 require('esn-frontend-common-libs/src/frontend/js/modules/config/config.module.js');
 require('esn-frontend-common-libs/src/frontend/js/modules/notification');
 
+require('./app.config');
 require('./app.constants');
 require('./app.run');
 require('./attachment/provider/inbox-linshare-attachment-provider.service');
