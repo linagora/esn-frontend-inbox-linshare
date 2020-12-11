@@ -2,10 +2,12 @@
 
 angular.module('linagora.esn.unifiedinbox.linshare')
 
-  .factory('inboxLinshareRestangular', function(Restangular, httpErrorHandler) {
-    return Restangular.withConfig(function(RestangularConfigurer) {
+  .factory('inboxLinshareRestangular', function(Restangular, httpConfigurer, httpErrorHandler) {
+    const apiBaseUrl = '/linagora.esn.unifiedinbox.linshare/api';
+
+    const restangularInstance = Restangular.withConfig(function(RestangularConfigurer) {
       RestangularConfigurer.setFullResponse(true);
-      RestangularConfigurer.setBaseUrl('/linagora.esn.unifiedinbox.linshare/api');
+      RestangularConfigurer.setBaseUrl(apiBaseUrl);
       RestangularConfigurer.setErrorInterceptor(function(response) {
         if (response.status === 401) {
           httpErrorHandler.redirectToLogin();
@@ -14,4 +16,8 @@ angular.module('linagora.esn.unifiedinbox.linshare')
         return true;
       });
     });
+
+    httpConfigurer.manageRestangular(restangularInstance, apiBaseUrl);
+
+    return restangularInstance;
   });
