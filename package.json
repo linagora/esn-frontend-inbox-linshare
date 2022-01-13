@@ -12,7 +12,6 @@
   "license": "AGPLv3",
   "dependencies": {
     "esn-frontend-common-libs": "github:linagora/esn-frontend-common-libs#main",
-    "esn-frontend-inbox": "github:linagora/esn-frontend-inbox#main",
     "esn-frontend-linshare": "github:linagora/esn-frontend-linshare#main",
     "lodash": "2.4.1"
   },
