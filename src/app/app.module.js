@@ -9,11 +9,9 @@ angular.module('linagora.esn.unifiedinbox.linshare', [
   'esn.lodash-wrapper',
   'esn.configuration',
   'esn.notification',
-  'esn.inbox.libs',
   'linagora.esn.linshare'
 ]);
 
-require('esn-frontend-inbox/src/esn.inbox.libs/app/app.module');
 require('esn-frontend-linshare/src/index');
 require('esn-frontend-common-libs/src/frontend/js/modules/async-action');
 require('esn-frontend-common-libs/src/frontend/js/modules/background');

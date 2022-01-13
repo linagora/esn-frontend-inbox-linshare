@@ -7,17 +7,15 @@ const expect = chai.expect;
 
 describe('The inboxLinsharePresendingHook service', function() {
   let $q, $rootScope;
-  let linshareApiClient, emailSendingService, inboxLinsharePresendingHook;
+  let linshareApiClient, inboxLinsharePresendingHook;
   let linshareAttachment, jmapAttachment;
   let INBOX_LINSHARE_EMAIL_ADDITIONAL_MESSAGE_TEMPLATES;
 
   beforeEach(angular.mock.module('linagora.esn.unifiedinbox.linshare'));
-  beforeEach(angular.mock.module('esn.inbox.libs'));
 
   beforeEach(angular.mock.inject(function(
     _$q_,
     _$rootScope_,
-    _emailSendingService_,
     _linshareApiClient_,
     _inboxLinsharePresendingHook_,
     _INBOX_LINSHARE_EMAIL_ADDITIONAL_MESSAGE_TEMPLATES_
@@ -26,7 +24,6 @@ describe('The inboxLinsharePresendingHook service', function() {
     $rootScope = _$rootScope_;
     inboxLinsharePresendingHook = _inboxLinsharePresendingHook_;
     linshareApiClient = _linshareApiClient_;
-    emailSendingService = _emailSendingService_;
     INBOX_LINSHARE_EMAIL_ADDITIONAL_MESSAGE_TEMPLATES = _INBOX_LINSHARE_EMAIL_ADDITIONAL_MESSAGE_TEMPLATES_;
 
     linshareAttachment = {
@@ -47,13 +44,8 @@ describe('The inboxLinsharePresendingHook service', function() {
 
   it('should call the LinShare API with only linshare attachments', function() {
     const email = {
+      to: [{ email: 'user1@open-paas.org' }],
       attachments: [linshareAttachment, jmapAttachment]
-    };
-
-    emailSendingService.getAllRecipientsExceptSender = function() {
-      return [{
-        email: 'user1@open-paas.org'
-      }];
     };
 
     inboxLinsharePresendingHook(email);
@@ -65,13 +57,8 @@ describe('The inboxLinsharePresendingHook service', function() {
 
   it('should not call the LinShare API if there is no LinShare attachment', function() {
     const email = {
+      to: [{ email: 'user1@open-paas.org' }],
       attachments: [jmapAttachment]
-    };
-
-    emailSendingService.getAllRecipientsExceptSender = function() {
-      return [{
-        email: 'user1@open-paas.org'
-      }];
     };
 
     inboxLinsharePresendingHook(email);
@@ -81,10 +68,6 @@ describe('The inboxLinsharePresendingHook service', function() {
   it('should not call the LinShare API if there is no recipient', function() {
     const email = {
       attachments: [linshareAttachment, jmapAttachment]
-    };
-
-    emailSendingService.getAllRecipientsExceptSender = function() {
-      return [];
     };
 
     inboxLinsharePresendingHook(email);
@@ -97,13 +80,8 @@ describe('The inboxLinsharePresendingHook service', function() {
       attachmentType: 'linshare'
     };
     const email = {
+      to: [{ email: 'user1@open-paas.org' }],
       attachments: [linshareAttachmentWithoutUuid, linshareAttachment, jmapAttachment]
-    };
-
-    emailSendingService.getAllRecipientsExceptSender = function() {
-      return [{
-        email: 'user1@open-paas.org'
-      }];
     };
 
     inboxLinsharePresendingHook(email);
@@ -115,13 +93,8 @@ describe('The inboxLinsharePresendingHook service', function() {
 
   it('should remove all the attachment with type of linshare from input email ', function() {
     const email = {
+      to: [{ email: 'user1@open-paas.org' }],
       attachments: [linshareAttachment, jmapAttachment]
-    };
-
-    emailSendingService.getAllRecipientsExceptSender = function() {
-      return [{
-        email: 'user1@open-paas.org'
-      }];
     };
 
     inboxLinsharePresendingHook(email);
@@ -130,15 +103,10 @@ describe('The inboxLinsharePresendingHook service', function() {
 
   it('should append notify message if the email contains LinShare attachment', function() {
     const email = {
+      to: [{ email: 'user1@open-paas.org' }],
       attachments: [linshareAttachment, linshareAttachment],
       htmlBody: '<p>email content</p>',
       textBody: 'email content'
-    };
-
-    emailSendingService.getAllRecipientsExceptSender = function() {
-      return [{
-        email: 'user1@open-paas.org'
-      }];
     };
 
     inboxLinsharePresendingHook(email);
@@ -150,13 +118,8 @@ describe('The inboxLinsharePresendingHook service', function() {
 
   it('should append notify message even email does not have body', function() {
     const email = {
+      to: [{ email: 'user1@open-paas.org' }],
       attachments: [linshareAttachment]
-    };
-
-    emailSendingService.getAllRecipientsExceptSender = function() {
-      return [{
-        email: 'user1@open-paas.org'
-      }];
     };
 
     inboxLinsharePresendingHook(email);
@@ -172,15 +135,10 @@ describe('The inboxLinsharePresendingHook service', function() {
 
   it('should not append notify message if the email does not contain LinShare attachment', function() {
     const email = {
+      to: [{ email: 'user1@open-paas.org' }],
       attachments: [jmapAttachment],
       htmlBody: '<p>email content</p>',
       textBody: 'email content'
-    };
-
-    emailSendingService.getAllRecipientsExceptSender = function() {
-      return [{
-        email: 'user1@open-paas.org'
-      }];
     };
 
     inboxLinsharePresendingHook(email);

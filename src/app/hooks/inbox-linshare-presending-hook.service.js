@@ -7,19 +7,35 @@ require('../app.constants');
 angular.module('linagora.esn.unifiedinbox.linshare')
   .factory('inboxLinsharePresendingHook', function(
     $q,
+    session,
     esnI18nService,
     linshareApiClient,
-    emailSendingService,
     INBOX_LINSHARE_ATTACHMENT_TYPE,
     INBOX_LINSHARE_EMAIL_ADDITIONAL_MESSAGE_TEMPLATES
   ) {
+    // From esn-frontend-inbox/src/esn.inbox.libs/app/services/send-email/email-sending.service.js
+    function getEmailAddress(recipient) {
+      if (recipient) {
+        return recipient.email || recipient.preferredEmail;
+      }
+    }
+
+    // From esn-frontend-inbox/src/esn.inbox.libs/app/services/send-email/email-sending.service.js
+    function getAllRecipientsExceptSender(email) {
+      const sender = session.user;
+
+      return [].concat(email.to || [], email.cc || [], email.bcc || []).filter(function(recipient) {
+        return recipient.email !== getEmailAddress(sender);
+      });
+    }
+
     return function(email) {
       const documents = _.remove(email.attachments, function(attachment) {
         return attachment.attachmentType === INBOX_LINSHARE_ATTACHMENT_TYPE;
       }).map(function(attachment) {
         return attachment.uuid;
       }).filter(Boolean);
-      const recipients = emailSendingService.getAllRecipientsExceptSender(email).map(function(recipient) {
+      const recipients = getAllRecipientsExceptSender(email).map(function(recipient) {
         return { mail: recipient.email };
       });
 
