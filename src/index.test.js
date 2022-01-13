@@ -19,7 +19,6 @@ require('angular-touch/angular-touch.js');
 require('ng-tags-input/build/ng-tags-input.js');
 require('moment-timezone/builds/moment-timezone-with-data-2012-2022.js');
 require('async/dist/async.js');
-require('esn-frontend-mailto-handler/src/index.js');
 require('angular-mocks/angular-mocks.js');
 
 require('./app/app.module.js');
